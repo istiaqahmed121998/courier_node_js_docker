@@ -5,7 +5,7 @@ const { connectWithRetry: dbconnection } = require('./db/connection');
 const app = express();
 const port = process.env.PORT || 8000;
 
-app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.send('Hello World! ');
