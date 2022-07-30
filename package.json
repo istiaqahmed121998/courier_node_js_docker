@@ -2,15 +2,16 @@
   "name": "courier_node_js",
   "version": "1.0.0",
   "description": "A delivery courier system app",
-  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node bin/www",
+    "dev": "nodemon bin/www",
+    "test": "npx mocha --exit --recursive test/"
   },
   "author": "jhony",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "bunyan": "^1.8.15",
     "connect-flash": "^0.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -18,6 +19,7 @@
     "express": "^4.18.1",
     "express-ejs-layouts": "^2.5.1",
     "i18n-express": "^1.1.3",
+    "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.21.3"
   },

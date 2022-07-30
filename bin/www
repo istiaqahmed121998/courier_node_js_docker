@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+const http = require('http');
+const { Sequelize } = require('sequelize');
+const config = require('../config')[process.env.NODE_ENV || 'development'];
+
+const log = config.log();
+const app = require('../app')(config);
+
+const { HOST, USER, PASSWORD, DB, pool, dialect } = config.database;
+const sequelize = new Sequelize(DB, USER, PASSWORD, {
+    host: HOST,
+    dialect,
+    pool,
+});
+sequelize
+    .authenticate()
+    .then(() => {
+        log.info('Successfully connected to MySQL');
+    })
+    .catch((err) => {
+        log.fatal(err);
+        process.exit(1);
+    });
+const server = http.createServer(app);
+
+server.listen(process.env.PORT || 3000);
+
+server.on('listening', () => {
+    log.info(`Hi there! I'm listening on port ${server.address().port} in ${app.get('env')} mode.`);
+});
