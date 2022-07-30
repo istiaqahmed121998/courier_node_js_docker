@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = async (sequelize) => {
     const db = {};
     fs.readdirSync(__dirname)
         // eslint-disable-next-line implicit-arrow-linebreak
@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     });
 
     // Is asynchronous but we won't wait here
-    sequelize.sync();
+    await sequelize.sync();
 
     db.sequelize = sequelize;
     db.Sequelize = Sequelize;
