@@ -24,8 +24,8 @@ sequelize
         log.fatal(err);
         process.exit(1);
     });
-config.mysql.client = sequelize;
-modelsync(config.mysql.client);
+config.database.client = sequelize;
+modelsync(config.database.client);
 const server = http.createServer(app);
 
 server.listen(process.env.PORT || 3000);

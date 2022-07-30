@@ -1,14 +1,16 @@
+/* eslint-disable import/no-dynamic-require */
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 
-module.exports = async (sequelize) => {
+module.exports = (sequelize) => {
     const db = {};
     fs.readdirSync(__dirname)
         // eslint-disable-next-line implicit-arrow-linebreak
         .filter((file) => file.indexOf('.') !== 0 && file !== 'index.js')
         .forEach((file) => {
-            const model = sequelize.import(path.join(__dirname, file));
+            // eslint-disable-next-line global-require
+            const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
             db[model.name] = model;
         });
 
@@ -19,7 +21,7 @@ module.exports = async (sequelize) => {
     });
 
     // Is asynchronous but we won't wait here
-    await sequelize.sync();
+    sequelize.sync();
 
     db.sequelize = sequelize;
     db.Sequelize = Sequelize;

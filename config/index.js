@@ -28,9 +28,9 @@ module.exports = {
         // eslint-disable-next-line implicit-arrow-linebreak
         log: () => getLogger(name, version, 'debug'),
         database: {
-            HOST: 'mysql',
+            HOST: '127.0.0.1',
             USER: 'root',
-            PASSWORD: 'mypassword',
+            PASSWORD: '01712274429',
             DB: 'testdb',
             dialect: 'mysql',
             pool: {
